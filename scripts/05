@@ -1,1 +1,1 @@
-service ssh status
+echo 42
