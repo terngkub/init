@@ -1,1 +1,16 @@
+echo "if [ ! -f /etc/crontab_md5sum ]
+then
+	touch /etc/crontab_md5sum
+fi
+OLD=\`cat /etc/crontab_md5sum\`
+NEW=\`md5sum /etc/crontab | awk '{print \$1}'\`
+if [ \"\$OLD\" != \"\$NEW\" ]
+then
+	echo \$NEW > /etc/crontab_md5sum
+	echo \"/etc/crontab has been modified.\" | mail -s 'crontab modified' root
+fi" > /etc/check_crontab.sh
 
+echo "0 0 * * * sh /etc/check_crontab.sh" > task.sh
+
+crontab task.sh
+rm task.sh

@@ -1,10 +1,1 @@
-echo "0 0 * * * \
-OLD=\`cat /etc/crontab_md5sum | awk '{print \$1}'\` && \
-NEW=\`md5sum /etc/crontab | awk '{print \$1}'\` && \
-if [ \"\$OLD\" != \"\$NEW\" ] ; then \
-	md5sum /etc/crontab | awk '{print \$1}' > /etc/crontab_md5sum && \
-	echo \"/etc/crontab has been modified.\" | mail -s 'crontab modified' terngnattapol@gmail.com \
-fi " > task.sh
-
-crontab task.sh
-rm task.sh
+echo 42
